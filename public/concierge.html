@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AI Concierge — NinjaScope</title>
+<link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/"><span class="ghost">👻</span><b>NinjaScope</b><span class="ver">v1.0</span></a>
+  <nav class="topnav">
+    <a href="/">Directory</a>
+    <a href="/compare.html">Compare</a>
+    <a href="/stack.html">My Stack</a>
+    <a href="/workflow.html">Workflows</a>
+    <a href="/launches.html">Launches</a>
+    <a href="/concierge.html" class="active">Concierge</a>
+  </nav>
+  <div class="topright"><button class="btn-primary">Sign Up</button></div>
+</header>
+
+<main class="page-pad container">
+  <div class="concierge">
+    <div class="eyebrow">AI CONCIERGE · GROUNDED IN 46 TOOLS</div>
+    <h1>Ask anything. Get a stack.</h1>
+    <p class="lead">Tell the Concierge what you're trying to do — it returns the single best tool plus 3 strong alternatives, grounded in real ratings, pricing, and your existing stack.</p>
+
+    <div class="chat" id="chat">
+      <div class="msg bot">
+        Hey 👋 — I'm the NinjaScope Concierge. Try asking <b>"I need to turn meeting recordings into polished blog posts"</b> or <b>"What's the cheapest text-to-video for my brand kit?"</b>
+      </div>
+    </div>
+    <form class="chat-input" id="qf">
+      <input id="qi" type="text" placeholder="Describe your need…" autofocus />
+      <button class="btn-primary">Ask</button>
+    </form>
+    <div class="suggestion-chips">
+      <div class="suggestion-chip" data-q="I need to edit a podcast and clean up audio">🎙️ Podcast editing</div>
+      <div class="suggestion-chip" data-q="I want to build a simple landing page without coding">💻 No-code app builder</div>
+      <div class="suggestion-chip" data-q="Free AI tools for a student researching a thesis">🎓 Free research tools</div>
+      <div class="suggestion-chip" data-q="Best AI for marketing video on a budget">🎬 Budget marketing video</div>
+    </div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div><b>NinjaScope</b> · v1.0 · Built by 👻 Phantom</div>
+    <div class="links"><a href="/">Home</a></div>
+  </div>
+</footer>
+
+<script>
+const chat = document.getElementById('chat');
+const qf = document.getElementById('qf');
+const qi = document.getElementById('qi');
+async function ask(q) {
+  chat.innerHTML += `<div class="msg user"><b>You:</b> ${q}</div>`;
+  qi.value = '';
+  const r = await fetch('/api/concierge', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ query: q }) }).then(r => r.json());
+  const sugs = (r.suggestions || []).map(t => `
+    <a class="msg-sug" href="${t.website}" target="_blank">
+      <b>${t.logo} ${t.name} · ⭐ ${t.rating}</b>
+      ${t.tagline}
+    </a>
+  `).join('');
+  chat.innerHTML += `<div class="msg bot"><b>Concierge:</b> ${r.answer}<div class="msg-sugs">${sugs}</div></div>`;
+  chat.scrollTop = chat.scrollHeight;
+}
+qf.onsubmit = e => { e.preventDefault(); if (qi.value.trim().length > 2) ask(qi.value.trim()); };
+document.querySelectorAll('.suggestion-chip').forEach(c => c.onclick = () => ask(c.dataset.q));
+</script>
+</body>
+</html>

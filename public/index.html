@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>NinjaScope — The AI Tool Intelligence Platform</title>
+<meta name="description" content="Discover, compare, track, and optimize your AI tool stack. NinjaScope is the next-gen successor to AI tool directories — built by Phantom." />
+<link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/"><span class="ghost">👻</span><b>NinjaScope</b><span class="ver">v1.0</span></a>
+  <nav class="topnav">
+    <a href="/" class="active">Directory</a>
+    <a href="/compare.html">Compare</a>
+    <a href="/stack.html">My Stack</a>
+    <a href="/workflow.html">Workflows</a>
+    <a href="/launches.html">Launches</a>
+    <a href="/concierge.html">Concierge</a>
+  </nav>
+  <div class="topright">
+    <button class="kbd">⌘K</button>
+    <button class="btn-ghost">Sign In</button>
+    <button class="btn-primary">Sign Up</button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="eyebrow">AI TOOL INTELLIGENCE · v1.0</div>
+    <h1>The AI tool directory that<br/><span class="accent">actually saves you money.</span></h1>
+    <p class="lead">Not just a list. NinjaScope tracks your real AI spend, surfaces tools that match your workflows, and tells you exactly when to switch, consolidate, or downgrade. Built for people who use AI for work.</p>
+    <div class="hero-cta">
+      <a href="#tools" class="btn-primary big">Explore <span id="hero-total">…</span> tools →</a>
+      <a href="/stack.html" class="btn-ghost big">Build my stack</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="hs-num" id="stat-tools">—</div><div class="hs-label">curated tools</div></div>
+      <div><div class="hs-num" id="stat-cats">—</div><div class="hs-label">categories</div></div>
+      <div><div class="hs-num" id="stat-rating">—</div><div class="hs-label">avg rating</div></div>
+      <div><div class="hs-num">$54/mo</div><div class="hs-label">avg user savings</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="how">
+  <div class="container">
+    <div class="eyebrow">HOW NINJASCOPE IS DIFFERENT</div>
+    <h2 class="sec-h">Six things <i>AiToologist</i> and the rest don't do.</h2>
+    <div class="how-grid">
+      <div class="how-card"><div class="how-num">01</div><h3>Personal Stack Tracker</h3><p>Connect once. We surface your real spend, idle subs, and sneaky overages across every AI tool — and tell you what to cut.</p><a class="how-link" href="/stack.html">See an example →</a></div>
+      <div class="how-card"><div class="how-num">02</div><h3>Workflow Builder</h3><p>Visual canvas to chain tools (Claude → Midjourney → Buffer). Save and share workflows. Export as n8n / Zapier automations.</p><a class="how-link" href="/workflow.html">Try the builder →</a></div>
+      <div class="how-card"><div class="how-num">03</div><h3>Smart Concierge</h3><p>"What should I use for X?" — answered against your stack, your budget, and your team's tooling. Grounded in 46+ tools.</p><a class="how-link" href="/concierge.html">Ask now →</a></div>
+      <div class="how-card"><div class="how-num">04</div><h3>Launch Radar</h3><p>Daily digest of every meaningful AI launch with a verdict ("try now", "wait for v2", "skip"). Zero FOMO scrolling.</p><a class="how-link" href="/launches.html">View radar →</a></div>
+      <div class="how-card"><div class="how-num">05</div><h3>Real Cost Optimizer</h3><p>Side-by-side TCO including overage tiers, team seats, FX. Tells you exactly when to switch or downgrade.</p><a class="how-link" href="/compare.html">Compare tools →</a></div>
+      <div class="how-card"><div class="how-num">06</div><h3>Team Stacks <span class="pill-new">SOON</span></h3><p>Share a curated stack with your org. Drift detection alerts when teammates spin up unapproved tools.</p><a class="how-link disabled">Reserve early access →</a></div>
+    </div>
+  </div>
+</section>
+
+<section id="tools" class="directory">
+  <div class="container">
+    <div class="directory-header">
+      <div>
+        <div class="eyebrow">TOOL DIRECTORY</div>
+        <h2 class="sec-h"><span id="dir-count">…</span> tools, every one curated.</h2>
+      </div>
+      <div class="dir-controls">
+        <input id="search" type="search" placeholder="Search tools, e.g. 'video editing'…" />
+        <select id="sort">
+          <option value="rating">⭐ Highest Rated</option>
+          <option value="users">📈 Most Popular</option>
+          <option value="newest">🆕 Newest</option>
+          <option value="price_asc">💲 Price: Low → High</option>
+          <option value="price_desc">💰 Price: High → Low</option>
+          <option value="name">🔤 A → Z</option>
+        </select>
+      </div>
+    </div>
+    <div class="dir-grid">
+      <aside class="filters">
+        <h4>Quick filters</h4>
+        <button class="chip active" data-filter="all">All</button>
+        <button class="chip" data-filter="trending">🔥 Trending</button>
+        <button class="chip" data-filter="free">🆓 Free</button>
+        <button class="chip" data-filter="new">✨ New</button>
+        <h4>Categories</h4>
+        <div id="cats"></div>
+        <h4>Pricing</h4>
+        <button class="chip pchip active" data-price="all">All</button>
+        <button class="chip pchip" data-price="Free">Free</button>
+        <button class="chip pchip" data-price="Freemium">Freemium</button>
+        <button class="chip pchip" data-price="Paid">Paid</button>
+      </aside>
+      <div id="grid" class="grid"></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="container">
+    <div>
+      <h2>Ready to take control of your AI stack?</h2>
+      <p>Stop guessing. NinjaScope tells you which tools to keep, swap, or drop.</p>
+    </div>
+    <div class="cta-row">
+      <a href="/stack.html" class="btn-primary big">Build my stack</a>
+      <a href="/concierge.html" class="btn-ghost big">Ask the Concierge</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div><b>NinjaScope</b> · v1.0 · Built end-to-end by 👻 Phantom for the Ninja team · 2026-05-29</div>
+    <div class="links"><a href="/healthz">Health</a><a href="https://github.com/babakpNinja/ninjascope" target="_blank">GitHub</a></div>
+  </div>
+</footer>
+
+<script src="/app.js"></script>
+</body>
+</html>

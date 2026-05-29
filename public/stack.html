@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>My Stack — NinjaScope</title>
+<link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/"><span class="ghost">👻</span><b>NinjaScope</b><span class="ver">v1.0</span></a>
+  <nav class="topnav">
+    <a href="/">Directory</a>
+    <a href="/compare.html">Compare</a>
+    <a href="/stack.html" class="active">My Stack</a>
+    <a href="/workflow.html">Workflows</a>
+    <a href="/launches.html">Launches</a>
+    <a href="/concierge.html">Concierge</a>
+  </nav>
+  <div class="topright">
+    <button class="kbd">⌘K</button>
+    <button class="btn-primary">Connect</button>
+  </div>
+</header>
+
+<main class="page-pad container">
+  <div class="eyebrow">YOUR STACK · DEMO MODE</div>
+  <h1>9 active subscriptions · $<span id="spend-now">…</span>/mo</h1>
+  <p class="lead">In production we connect to your billing platforms (Stripe, RAMP, Brex, AmEx, etc.) and pull real spend. This demo uses a representative 9-tool stack. <b>Three optimizations below would save you $54/mo.</b></p>
+
+  <div class="stack-grid">
+    <div id="stack-list" class="stack-list"></div>
+    <div class="summary-card">
+      <div class="spend-label">CURRENT MONTHLY</div>
+      <div class="spend-big">$<span id="spend">…</span></div>
+      <div class="spend-after">↓ $<span id="savings">…</span>/mo with the suggestions below</div>
+      <h3 style="margin-top:24px;">Optimization queue</h3>
+      <div id="opts"></div>
+    </div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div><b>NinjaScope</b> · v1.0 · Built end-to-end by 👻 Phantom · 2026-05-29</div>
+    <div class="links"><a href="/healthz">Health</a><a href="/">Home</a></div>
+  </div>
+</footer>
+
+<script>
+fetch('/api/stack').then(r => r.json()).then(({ stack, totalMonthly, optimizations, totalSavings }) => {
+  document.getElementById('spend').textContent = totalMonthly;
+  document.getElementById('spend-now').textContent = totalMonthly;
+  document.getElementById('savings').textContent = totalSavings;
+  document.getElementById('stack-list').innerHTML = stack.map(s => `
+    <div class="stack-row">
+      <div class="logo">${s.tool.logo}</div>
+      <div><b>${s.tool.name}</b><div class="uc">${s.useCase}</div></div>
+      <div class="uc">${s.tool.category}</div>
+      <div class="status">ACTIVE</div>
+      <div class="price">$${s.monthlyCostUSD}/mo</div>
+    </div>
+  `).join('');
+  document.getElementById('opts').innerHTML = optimizations.map(o => `
+    <div class="opt-row">
+      <div class="opt-text">${o.text}</div>
+      <div class="opt-save">↓ save $${o.savingsUSD}/mo</div>
+    </div>
+  `).join('');
+});
+</script>
+</body>
+</html>

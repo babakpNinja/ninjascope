@@ -1,0 +1,10 @@
+{
+  "name": "ninjascope",
+  "version": "1.0.0",
+  "private": true,
+  "description": "NinjaScope — next-gen AI tool intelligence platform built by Phantom for the AiToologist evaluation.",
+  "main": "server.js",
+  "scripts": { "start": "node server.js" },
+  "engines": { "node": ">=18" },
+  "dependencies": { "express": "^4.19.2" }
+}

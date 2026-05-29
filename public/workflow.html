@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Workflows — NinjaScope</title>
+<link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/"><span class="ghost">👻</span><b>NinjaScope</b><span class="ver">v1.0</span></a>
+  <nav class="topnav">
+    <a href="/">Directory</a>
+    <a href="/compare.html">Compare</a>
+    <a href="/stack.html">My Stack</a>
+    <a href="/workflow.html" class="active">Workflows</a>
+    <a href="/launches.html">Launches</a>
+    <a href="/concierge.html">Concierge</a>
+  </nav>
+  <div class="topright"><button class="btn-primary">Sign Up</button></div>
+</header>
+
+<main class="page-pad container">
+  <div class="eyebrow">WORKFLOW BUILDER · PREVIEW</div>
+  <h1>Chain your tools into workflows</h1>
+  <p class="lead">Pre-built templates below for the most common AI workflows. In v1.1 every node becomes draggable; in v1.2 you can export to n8n / Zapier / Pipedream.</p>
+
+  <div class="flow-presets">
+    <button class="chip active" data-p="content">📝 Content production</button>
+    <button class="chip" data-p="research">🔬 Research → brief</button>
+    <button class="chip" data-p="dev">💻 Code review pipeline</button>
+    <button class="chip" data-p="design">🎨 Brand visual loop</button>
+    <button class="chip" data-p="meetings">📅 Meeting → action items</button>
+  </div>
+
+  <div class="flow-canvas" id="canvas"></div>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div><b>NinjaScope</b> · v1.0 · Built by 👻 Phantom</div>
+    <div class="links"><a href="/">Home</a></div>
+  </div>
+</footer>
+
+<script>
+const presets = {
+  content: [
+    { logo: '🧂', name: 'Granola', step: 'capture meeting' },
+    { logo: '💭', name: 'Claude', step: 'draft outline' },
+    { logo: '🎨', name: 'Midjourney', step: 'hero image' },
+    { logo: '🎯', name: 'Gamma', step: 'render deck' },
+    { logo: '⚡', name: 'Zapier', step: 'push to Slack' }
+  ],
+  research: [
+    { logo: '☄️', name: 'Comet', step: 'browse + read' },
+    { logo: '🔍', name: 'Perplexity', step: 'cite sources' },
+    { logo: '💭', name: 'Claude', step: 'synthesize' },
+    { logo: '📝', name: 'Notion AI', step: 'publish brief' }
+  ],
+  dev: [
+    { logo: '🐙', name: 'GitHub Copilot', step: 'write code' },
+    { logo: '⚡', name: 'Cursor', step: 'refactor' },
+    { logo: '💭', name: 'Claude', step: 'code review' },
+    { logo: '📊', name: 'Langfuse', step: 'observe' }
+  ],
+  design: [
+    { logo: '🪐', name: 'Galileo AI', step: 'wireframe' },
+    { logo: '🎨', name: 'Midjourney', step: 'concept' },
+    { logo: '🧩', name: 'Figma AI', step: 'polish' },
+    { logo: '🖌️', name: 'Recraft', step: 'export brand kit' }
+  ],
+  meetings: [
+    { logo: '🦦', name: 'Otter.ai', step: 'transcribe' },
+    { logo: '🧂', name: 'Granola', step: 'summarize' },
+    { logo: '📐', name: 'Linear AI', step: 'create tickets' },
+    { logo: '🌬️', name: 'Wispr Flow', step: 'voice-reply' }
+  ]
+};
+function render(name) {
+  const c = document.getElementById('canvas');
+  const flow = presets[name];
+  c.innerHTML = `<div class="flow-row">${flow.map((f, i) => `
+    <div class="flow-node">
+      <div class="lg">${f.logo}</div>
+      <b>${f.name}</b>
+      <div class="nl">${f.step}</div>
+    </div>
+    ${i < flow.length - 1 ? '<div class="flow-arrow">→</div>' : ''}
+  `).join('')}</div>`;
+}
+document.querySelectorAll('[data-p]').forEach(b => b.onclick = () => {
+  document.querySelectorAll('[data-p]').forEach(x => x.classList.remove('active'));
+  b.classList.add('active');
+  render(b.dataset.p);
+});
+render('content');
+</script>
+</body>
+</html>
