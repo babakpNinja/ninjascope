@@ -53,7 +53,7 @@ async function init() {
   pl.innerHTML = all.map(t => `
     <label class="pick-row ${sel.has(t.slug) ? 'selected' : ''}" data-slug="${t.slug}">
       <input type="checkbox" ${sel.has(t.slug) ? 'checked' : ''} />
-      <span style="font-size:18px;">${t.logo}</span>
+      ${t.logoUrl ? `<img src="${t.logoUrl}" alt="" style="width:18px;height:18px;object-fit:contain;background:white;border-radius:3px;padding:1px;" />` : `<span style="font-size:18px;">${t.logo}</span>`}
       <span>${t.name}</span>
     </label>
   `).join('');
@@ -80,7 +80,7 @@ async function render() {
   const minPrice = Math.min(...tools.map(t => t.priceFromUSD || Infinity));
   const cardsHtml = tools.map(t => `
     <div class="compare-card">
-      <div class="logo">${t.logo}</div>
+      ${t.logoUrl ? `<img class="logo" src="${t.logoUrl}" alt="${t.name}" />` : `<div class="logo">${t.logo}</div>`}
       <h3>${t.name}</h3>
       <div class="tg">${t.tagline}</div>
     </div>

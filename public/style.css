@@ -179,3 +179,11 @@ button { font: inherit; cursor: pointer; }
   .compare-page { grid-template-columns: 1fr; }
   .topnav { display: none; }
 }
+
+/* Logo elements — support both <img> and <span> */
+img.card-logo { width: 36px; height: 36px; object-fit: contain; border-radius: 6px; background: white; padding: 4px; }
+.stack-row img.logo { width: 32px; height: 32px; object-fit: contain; border-radius: 6px; background: white; padding: 3px; }
+.compare-card img.logo { width: 40px; height: 40px; object-fit: contain; border-radius: 6px; background: white; padding: 4px; display: block; margin-bottom: 6px; }
+.flow-node img.lg { width: 32px; height: 32px; object-fit: contain; border-radius: 6px; background: white; padding: 3px; margin: 0 auto; }
+.launch-card img.lg { width: 36px; height: 36px; object-fit: contain; border-radius: 6px; background: white; padding: 4px; }
+.msg-sug img.lg { width: 24px; height: 24px; object-fit: contain; border-radius: 4px; background: white; padding: 2px; vertical-align: middle; margin-right: 4px; }

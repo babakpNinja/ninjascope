@@ -1,6 +1,11 @@
 let ALL = [], CATEGORIES = [], FILTERED = [];
 let state = { filter: 'all', category: 'all', pricing: 'all', q: '', sort: 'rating' };
 
+function logoHtml(t, cls) {
+  if (t.logoUrl) return `<img src="${t.logoUrl}" alt="${t.name}" class="${cls}" loading="lazy" />`;
+  return `<span class="${cls}">${t.logo || '🤖'}</span>`;
+}
+
 async function load() {
   const [statsR, toolsR] = await Promise.all([
     fetch('/api/stats').then(r => r.json()),
@@ -20,8 +25,7 @@ async function load() {
 function renderCats() {
   const wrap = document.getElementById('cats');
   wrap.innerHTML = '';
-  const all = catBtn('all', `All (${ALL.length})`);
-  wrap.appendChild(all);
+  wrap.appendChild(catBtn('all', `All (${ALL.length})`));
   CATEGORIES.forEach(c => {
     const n = ALL.filter(t => t.category === c).length;
     wrap.appendChild(catBtn(c, `${c} (${n})`));
@@ -51,7 +55,6 @@ async function applyFilters() {
   const r = await fetch(url).then(r => r.json());
   FILTERED = r.tools;
   document.getElementById('dir-count').textContent = r.count;
-  // sync chip activeness
   document.querySelectorAll('[data-filter]').forEach(b => b.classList.toggle('active', b.dataset.filter === state.filter));
   document.querySelectorAll('[data-price]').forEach(b => b.classList.toggle('active', b.dataset.price === state.pricing));
   document.querySelectorAll('.cat-chip').forEach(b => b.classList.toggle('active', b.dataset.cat === state.category));
@@ -64,7 +67,7 @@ function renderGrid(items) {
   g.innerHTML = items.map(t => `
     <a class="card" href="${t.website}" target="_blank" rel="noopener">
       <div class="card-head">
-        <div class="card-logo">${t.logo || '🤖'}</div>
+        ${logoHtml(t, 'card-logo')}
         <div class="card-rating">⭐ ${t.rating}</div>
       </div>
       <h3>${t.name}${t.trending ? '<span class="trending-pill">TRENDING</span>' : ''}</h3>

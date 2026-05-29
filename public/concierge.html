@@ -61,7 +61,7 @@ async function ask(q) {
   const r = await fetch('/api/concierge', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ query: q }) }).then(r => r.json());
   const sugs = (r.suggestions || []).map(t => `
     <a class="msg-sug" href="${t.website}" target="_blank">
-      <b>${t.logo} ${t.name} · ⭐ ${t.rating}</b>
+      <b>${t.logoUrl ? `<img class="lg" src="${t.logoUrl}" alt="" />` : t.logo} ${t.name} · ⭐ ${t.rating}</b>
       ${t.tagline}
     </a>
   `).join('');

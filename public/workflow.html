@@ -46,35 +46,35 @@
 <script>
 const presets = {
   content: [
-    { logo: '🧂', name: 'Granola', step: 'capture meeting' },
-    { logo: '💭', name: 'Claude', step: 'draft outline' },
-    { logo: '🎨', name: 'Midjourney', step: 'hero image' },
-    { logo: '🎯', name: 'Gamma', step: 'render deck' },
-    { logo: '⚡', name: 'Zapier', step: 'push to Slack' }
+    {logo: '🧂', name: 'Granola', step: 'capture meeting', logoUrl: '/logos/granola.png' },
+    {logo: '💭', name: 'Claude', step: 'draft outline', logoUrl: '/logos/claude.png' },
+    {logo: '🎨', name: 'Midjourney', step: 'hero image', logoUrl: '/logos/midjourney.png' },
+    {logo: '🎯', name: 'Gamma', step: 'render deck', logoUrl: '/logos/gamma.png' },
+    {logo: '⚡', name: 'Zapier', step: 'push to Slack', logoUrl: '/logos/zapier.png' }
   ],
   research: [
-    { logo: '☄️', name: 'Comet', step: 'browse + read' },
-    { logo: '🔍', name: 'Perplexity', step: 'cite sources' },
-    { logo: '💭', name: 'Claude', step: 'synthesize' },
-    { logo: '📝', name: 'Notion AI', step: 'publish brief' }
+    {logo: '☄️', name: 'Comet', step: 'browse + read', logoUrl: '/logos/comet.png' },
+    {logo: '🔍', name: 'Perplexity', step: 'cite sources', logoUrl: '/logos/perplexity.png' },
+    {logo: '💭', name: 'Claude', step: 'synthesize', logoUrl: '/logos/claude.png' },
+    {logo: '📝', name: 'Notion AI', step: 'publish brief', logoUrl: '/logos/notion-ai.png' }
   ],
   dev: [
-    { logo: '🐙', name: 'GitHub Copilot', step: 'write code' },
-    { logo: '⚡', name: 'Cursor', step: 'refactor' },
-    { logo: '💭', name: 'Claude', step: 'code review' },
-    { logo: '📊', name: 'Langfuse', step: 'observe' }
+    {logo: '🐙', name: 'GitHub Copilot', step: 'write code', logoUrl: '/logos/github-copilot.png' },
+    {logo: '⚡', name: 'Cursor', step: 'refactor', logoUrl: '/logos/cursor.png' },
+    {logo: '💭', name: 'Claude', step: 'code review', logoUrl: '/logos/claude.png' },
+    {logo: '📊', name: 'Langfuse', step: 'observe', logoUrl: '/logos/langfuse.png' }
   ],
   design: [
-    { logo: '🪐', name: 'Galileo AI', step: 'wireframe' },
-    { logo: '🎨', name: 'Midjourney', step: 'concept' },
-    { logo: '🧩', name: 'Figma AI', step: 'polish' },
-    { logo: '🖌️', name: 'Recraft', step: 'export brand kit' }
+    {logo: '🪐', name: 'Galileo AI', step: 'wireframe', logoUrl: '/logos/galileo-ai.png' },
+    {logo: '🎨', name: 'Midjourney', step: 'concept', logoUrl: '/logos/midjourney.png' },
+    {logo: '🧩', name: 'Figma AI', step: 'polish', logoUrl: '/logos/figma-ai.png' },
+    {logo: '🖌️', name: 'Recraft', step: 'export brand kit', logoUrl: '/logos/recraft.png' }
   ],
   meetings: [
-    { logo: '🦦', name: 'Otter.ai', step: 'transcribe' },
-    { logo: '🧂', name: 'Granola', step: 'summarize' },
-    { logo: '📐', name: 'Linear AI', step: 'create tickets' },
-    { logo: '🌬️', name: 'Wispr Flow', step: 'voice-reply' }
+    {logo: '🦦', name: 'Otter.ai', step: 'transcribe', logoUrl: '/logos/otter-ai.png' },
+    {logo: '🧂', name: 'Granola', step: 'summarize', logoUrl: '/logos/granola.png' },
+    {logo: '📐', name: 'Linear AI', step: 'create tickets', logoUrl: '/logos/linear-ai.png' },
+    {logo: '🌬️', name: 'Wispr Flow', step: 'voice-reply', logoUrl: '/logos/wispr-flow.png' }
   ]
 };
 function render(name) {
@@ -82,7 +82,7 @@ function render(name) {
   const flow = presets[name];
   c.innerHTML = `<div class="flow-row">${flow.map((f, i) => `
     <div class="flow-node">
-      <div class="lg">${f.logo}</div>
+      ${f.logoUrl ? `<img class="lg" src="${f.logoUrl}" alt="" />` : `<div class="lg">${f.logo}</div>`}
       <b>${f.name}</b>
       <div class="nl">${f.step}</div>
     </div>

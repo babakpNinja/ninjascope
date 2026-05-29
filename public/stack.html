@@ -54,7 +54,7 @@ fetch('/api/stack').then(r => r.json()).then(({ stack, totalMonthly, optimizatio
   document.getElementById('savings').textContent = totalSavings;
   document.getElementById('stack-list').innerHTML = stack.map(s => `
     <div class="stack-row">
-      <div class="logo">${s.tool.logo}</div>
+      ${s.tool.logoUrl ? `<img class="logo" src="${s.tool.logoUrl}" alt="${s.tool.name}" />` : `<div class="logo">${s.tool.logo}</div>`}
       <div><b>${s.tool.name}</b><div class="uc">${s.useCase}</div></div>
       <div class="uc">${s.tool.category}</div>
       <div class="status">ACTIVE</div>
